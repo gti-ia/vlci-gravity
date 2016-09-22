@@ -36,6 +36,7 @@ Usage: gravmapper.py [options]
 
 Options:
   -h, --help            show this help message and exit
+  -k KEY, --key=KEY     Key to produce and send to reducer
   -i INIT_DATE, --init-date=INIT_DATE
                         Min date to process tweets. Format %Y%m%d
   -e END_DATE, --end-date=END_DATE
