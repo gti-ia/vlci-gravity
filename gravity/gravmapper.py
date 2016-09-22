@@ -3,7 +3,7 @@
 import sys
 from optparse import OptionParser
 
-import json
+import gravity
 
 import numpy as np
 import datetime as dt
@@ -71,7 +71,7 @@ for tweet in sys.stdin:
     # Trailing and Leading white space is removed
     tweet = tweet.strip()
     try:
-        jsontweet = json.loads(tweet)
+        jsontweet = gravity.loads(tweet)
         created_at = dt.datetime.strptime(jsontweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
         if jsontweet["coordinates"] is not None and (min_date <= created_at <= max_date):
             longitude = float(jsontweet["coordinates"]["coordinates"][0])

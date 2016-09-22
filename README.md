@@ -71,6 +71,6 @@ Options:
 In the case you want to test the algorithm with a small set of data (see json/examples folder) you can run:
 
 ```bash
-cat json/example/example_input_tweets.txt | json/grav.py | sort -k1,1 | json/gravreducer.py
+cat gravity/example/example_input_tweets.txt | gravity/grav.py | sort -k1,1 | gravity/gravreducer.py
 ```
 
