@@ -1,5 +1,5 @@
 import json
-import csv
+import gravity
 from io import StringIO
 import codecs
 import argparse
@@ -21,7 +21,7 @@ numlines=0
 
 with open(args.source,'r', encoding='utf-8') as source:
     with open(args.output, 'a') as f:
-        output = csv.writer(f)
+        output = gravity.writer(f)
         output.writerow(headers)
     for line in tqdm(source):
             numlines += 1
@@ -44,6 +44,6 @@ with open(args.source,'r', encoding='utf-8') as source:
             buf.append([tweet[k] for k in headers])
             if len(buf) > 1000:
                 with open(args.output, 'a', encoding='utf-8') as f:
-                    output = csv.writer(f)
+                    output = gravity.writer(f)
                     output.writerows(buf)
                 buf = []
