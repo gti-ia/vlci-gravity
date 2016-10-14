@@ -3,12 +3,6 @@ import os
 
 import requests
 
-auth = {'auth': {'identity': {'methods': ['password'],
-                              'password': {'user': {'domain': {'name': 'sc_vlci'},
-                                                    'name': 'utool_admin',
-                                                    'password': 'utool_4dmin'}}},
-                 'scope': {'project': {'domain': {'name': 'sc_vlci'}, 'name': '/utool'}}}}
-
 auth_url = "https://auth-pre.iotplatform.telefonica.com:15001/v3/auth/tokens"
 
 cb_url = "https://cb-pre.iotplatform.telefonica.com:10027/"
@@ -18,7 +12,12 @@ headers = {'Fiware-Service': 'sc_vlci',
            'X-Auth-Token': None}
 
 
-def gettoken():
+def gettoken(username, password):
+    auth = {'auth': {'identity': {'methods': ['password'],
+                                  'password': {'user': {'domain': {'name': 'sc_vlci'},
+                                                        'name': username,
+                                                        'password': password}}},
+                     'scope': {'project': {'domain': {'name': 'sc_vlci'}, 'name': '/utool'}}}}
     res = requests.post(auth_url, json=auth)
     return res.headers["X-Subject-Token"]
 
