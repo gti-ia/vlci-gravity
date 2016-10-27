@@ -11,6 +11,26 @@ headers = {'Fiware-Service': 'sc_vlci',
            'Fiware-ServicePath': '/utool',
            'X-Auth-Token': None}
 
+def create_entity(entity, username, password):
+    token = gettoken(username, password)
+    headers['X-Auth-Token'] = token
+    
+    payload = {'geojson': {'type': 'GeoJson',
+                           'value': {}
+                          },
+               'id': entity,
+               'type': 'GeoJson'}
+
+    res = requests.post(cb_url+"v2/entities", headers=headers, json=payload)
+    return res.status_code, res.text
+
+
+def get_entity(entity, username, password):
+    token = gettoken(username, password)
+    headers['X-Auth-Token'] = token
+    res = requests.get(cb_url+"v2/entities/{0}/attrs/geojson".format(entity), headers=headers)
+    return res.text
+
 
 def gettoken(username, password):
     auth = {'auth': {'identity': {'methods': ['password'],
@@ -22,8 +42,8 @@ def gettoken(username, password):
     return res.headers["X-Subject-Token"]
 
 
-def put_new_geojson(entity):
-    token = gettoken()
+def put_new_geojson(entity, username, password):
+    token = gettoken(username, password)
     headers['X-Auth-Token'] = token
 
     os.system("hadoop fs -get /user/utool_upv/output/latest.geojson gravity.geojson")
@@ -36,4 +56,4 @@ def put_new_geojson(entity):
     print(result.status_code, result.text)
 
 if __name__ == "__main__":
-    put_new_geojson("VLC::gravity")
+    put_new_geojson("vlcgravity", "", "")

@@ -22,8 +22,8 @@ def gettoken(username, password):
     return res.headers["X-Subject-Token"]
 
 
-def put_new_geojson(entity):
-    token = gettoken()
+def put_new_geojson(entity, username, password):
+    token = gettoken(username, password)
     headers['X-Auth-Token'] = token
 
     os.system("hadoop fs -get /user/utool_upv/output/latest.weekly.geojson gravity.geojson")
@@ -38,4 +38,4 @@ def put_new_geojson(entity):
 
 
 if __name__ == "__main__":
-    put_new_geojson("VLC::gravity::weekly")
+    put_new_geojson("vlcgravityweekly", "", "")
