@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 from optparse import OptionParser
 
 import numpy as np
@@ -57,7 +59,7 @@ parser.add_option("-o", "--output", dest="output",
 
 (options, args) = parser.parse_args()
 
-with open(options.input, 'r') as f:
+with open(options.input.strip(), 'r') as f:
     data = " ".join(f.readlines())
 
 matrix = data.split("\t")[1]
@@ -80,5 +82,5 @@ stroke_width = 2
 # matplotlib contour lines to geojson
 contour_lines_geojson = contour_to_geojson(contour, stroke_width)
 
-with open(options.output, 'w') as fileout:
+with open(options.output.strip(), 'w') as fileout:
     fileout.write(contour_lines_geojson)
